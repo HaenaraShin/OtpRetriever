@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OtpRetriever:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/OtpRetriever_jar</output-path>
+    <root id="archive" name="OtpRetriever.jar">
+      <element id="module-output" name="OtpRetriever" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/javax.mail.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
