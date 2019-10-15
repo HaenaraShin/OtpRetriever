@@ -145,10 +145,12 @@ public class OtpEmailReader implements OtpMinner{
                 String text = message.getContent().toString();
                 String time = message.getHeader("Received")[0].split(";")[1].trim();
                 System.out.println("Text : " + text + " time : " + time);
-                if (isTimeVaild(time)) {
-                    tempOtp = text.split(" : ")[1].substring(0, 6);
-                    System.out.println("OTP:" + tempOtp);
-                }
+                // 2019.10.15 HaenaraShin.
+                // Either local PC or mail server's system time could be set incorrect or different.
+                // Unless you calculate the time gap between mail server and local PC,
+                // OTP expiration time must not be checked.
+                tempOtp = text.split(" : ")[1].substring(0, 6);
+                System.out.println("OTP:" + tempOtp);
                 break;
             }
         }
