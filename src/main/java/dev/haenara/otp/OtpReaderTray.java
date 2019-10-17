@@ -147,7 +147,7 @@ public class OtpReaderTray implements OtpObserver{
     }
 
     private Image createImage() {
-        URL url = Main.class.getResource("/resources/icon/otp.png");
+        URL url = getClass().getResource("/icon/otp.png");
         return Toolkit.getDefaultToolkit().getImage(url);
     }
 

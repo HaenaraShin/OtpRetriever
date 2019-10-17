@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 public class OtpEmailReader implements OtpMinner{
 
-    private final ArrayList<OtpObserver> observers = new ArrayList<>();
+    private final ArrayList<OtpObserver> observers = new ArrayList<OtpObserver>();
     private boolean isAlive = false;
 
     public static Store checkAuth(String id, String pwd) throws MessagingException {
@@ -50,7 +50,7 @@ public class OtpEmailReader implements OtpMinner{
 
     boolean isOtpReading = false;
 
-    public synchronized void readOtp(String user, String password) {
+    public synchronized void readOtp(final String user, final String password) {
         System.out.println("READ OTP START");
         if (!isOtpReading) {
 

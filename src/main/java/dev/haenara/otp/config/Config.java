@@ -13,4 +13,3 @@ public class Config {
     public static final long EXPIATION_DURATION = 180L; // OTP EXPIRE TIME (sec)
     public static final int DURATION = 500; // EMAIL reading duraion.
 }
-

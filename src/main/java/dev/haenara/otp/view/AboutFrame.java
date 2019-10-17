@@ -21,7 +21,7 @@ public class AboutFrame extends JFrame {
     private static final int Y = 100;
     private static final String EMAIL = "hamster12345@gmail.com";
 
-    private JLabel labelImage = new JLabel(new ImageIcon(Main.class.getResource("/resources/icon/otp.png")));
+    private JLabel labelImage = new JLabel(new ImageIcon(getClass().getResource("/icon/otp.png")));
 
     public AboutFrame(){
         super(TITLE);
@@ -58,7 +58,9 @@ public class AboutFrame extends JFrame {
                 public void mouseClicked(MouseEvent e) {
                     try {
                         Desktop.getDesktop().mail(new URI("mailto:" + EMAIL));
-                    } catch (URISyntaxException | IOException ex) {
+                    } catch (URISyntaxException ex) {
+
+                    } catch (IOException ex){
 
                     }
                 }
