@@ -1,6 +1,6 @@
 # OTP Retriever
 
-**OTP Retriever keeps observing email inbox. When it finds out the newest OTP, copies to the clipboard. Only thing you have to do is pasting it for authentication.**
+**OTP Retriever keeps observing your email inbox. When it finds out the newest OTP, copies to the clipboard. Only thing you have to do is pasting it for authentication.**
 
 ## Purpose
 
