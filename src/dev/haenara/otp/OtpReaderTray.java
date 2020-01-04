@@ -3,6 +3,7 @@ package dev.haenara.otp;
 
 import dev.haenara.otp.config.Config;
 import dev.haenara.otp.view.AboutFrame;
+import top.gigabox.supportcomponent.toast.MaterialTost;
 
 import javax.mail.MessagingException;
 import javax.mail.Store;
@@ -12,6 +13,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
@@ -24,6 +27,7 @@ public class OtpReaderTray implements OtpObserver{
     private MenuItem aboutItem = new MenuItem("About");
     private MenuItem loginItem = new MenuItem("Email Login");
     private MenuItem exitItem = new MenuItem("Exit");
+    private CheckboxMenuItem checkToastItem = new CheckboxMenuItem("Use Toast");
     private LoginFrame frame = new LoginFrame(this, "Login");
 
     private DataManager dataManager = new DataManager();
@@ -52,12 +56,25 @@ public class OtpReaderTray implements OtpObserver{
         popup.add(aboutItem);
         popup.add(loginItem);
         popup.addSeparator();
+        popup.add(checkToastItem);
+        popup.addSeparator();
         popup.add(exitItem);
 
         aboutItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AboutFrame();
+            }
+        });
+
+        checkToastItem.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent itemEvent) {
+                if (itemEvent.getStateChange() == ItemEvent.SELECTED) {
+                    isShowWithToast = true;
+                } else {
+                    isShowWithToast = false;
+                }
             }
         });
 
@@ -151,12 +168,22 @@ public class OtpReaderTray implements OtpObserver{
         return Toolkit.getDefaultToolkit().getImage(url);
     }
 
+    private JFrame dummy = new JFrame();
+    private boolean isShowWithToast = false;
     public void showMessage(String message){
-        trayIcon.displayMessage("OTP", message, TrayIcon.MessageType.NONE);
+        if (isShowWithToast) {
+            MaterialTost.makeText(dummy, message, MaterialTost.LONG).display();
+        } else {
+            trayIcon.displayMessage("OTP", message, TrayIcon.MessageType.NONE);
+        }
     }
 
     public void showErrorMessage(String message){
-        trayIcon.displayMessage("OTP", message, TrayIcon.MessageType.ERROR);
+        if (isShowWithToast) {
+            MaterialTost.makeText(dummy, message).display();
+        } else {
+            trayIcon.displayMessage("OTP", message, TrayIcon.MessageType.ERROR);
+        }
     }
 
     public void isAuthenticated(boolean b) {
